@@ -1,0 +1,80 @@
+#header{
+	background: rgb(51, 133, 255); 
+	padding:  1px 5px 10px; 
+	border: 1px solid rgb(204, 204, 204);
+	height: 110px;
+	padding-top: 30px;
+	border-radius: 15px 15px 15px 15px;
+	margin: 2px 2px 2px 2px;
+}
+
+#header span{
+	color: rgb(255, 240, 245);
+}
+
+#header p{
+	font-size: 34px;
+	text-align: center;
+}
+
+
+#menu {
+	_border: 1px solid #000;
+	display: block;
+	text-align: center;
+	padding-top: 10px;
+}
+
+#menu  li{
+	min-width: 200px;
+	display:inline-block;
+	float:none;
+	font-weight: bold;
+}
+
+#menu  ul li a:hover {
+	color: #0CF;
+}
+
+
+.container .section-title h3{
+	color: #602020;
+
+}
+
+.home_div{
+	margin-top: 40px;
+	height: 400px;
+}
+
+.home_div1{
+	border: 1px solid rgb(204, 204, 204);
+	height: 350px;
+	margin-right: 20px;
+	padding: 0px 0px 0px 10px;
+}
+
+.home_div1 li{
+	margin: 20px 0px 0px 40px;
+}
+
+.home_div2{
+	border: 1px solid rgb(204, 204, 204);
+	height: 350px;
+}
+
+.home_div2 li{
+	margin: 20px 0px 0px 40px;
+}
+
+#list video { display: none; }
+
+
+
+
+
+
+
+
+
+
