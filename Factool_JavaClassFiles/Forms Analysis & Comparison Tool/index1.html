@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<meta charset="ISO-8859-1" />
+	<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+	<title>Forms Analysis and Copmarison Tool</title>
+	<link href="app/styles/style.css" rel="stylesheet">
+	<link href="app/lib/bootstrap.css" rel="stylesheet">
+	<script src="app/lib/jquery-3.1.0.min.js"></script>
+ 	<script src="app/lib/bootstrap.js"></script>
+ 	<script src="app/lib/angular.js"></script>
+ 	<script src="app/app.js"></script>
+</head>
+<body >
+<div ng-controller="mainController">
+
+	<div id="header">
+		<p><span>
+			<img src="app/images/logo.png" class="img-rounded" alt="new/deleted components sheet" width="200px" height="70px" style="margin-left:-400px;">
+			<strong>Forms Anaysis and Comparison Tool </strong>
+		</span></p>
+	</div><!-- header end -->
+
+	<div id="menu">
+		<ul class="nav nav-pills">
+		 <li role="presentation" ><a href="#" ng-click="showDiv('homeFlag')">Home</a></li>
+		  <li role="presentation" ><a href="#" ng-click="showDiv('formCompFlag')">Forms Comparison</a></li>
+
+		  	<li role="presentation" class="dropdown">
+		    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+		      Forms Analysis <span class="caret"></span>
+		    </a>
+		    <ul class="dropdown-menu">
+				&nbsp;&nbsp;Combined Report:
+		    	<li role="presentation" ><a href="#" ng-click="showDiv('formAnarepFlag')">Forms Analysis Report</a></li>
+		    	<li role="separator" class="divider"></li>&nbsp;&nbsp;Individual Report:
+		    	<li role="presentation" ><a href="#" ng-click="showDiv('sectionFlag')">Section Analysis (FOR)</a></li>
+		    	<li role="presentation" ><a href="#" ng-click="showDiv('imgFlag')">Image Analysis (FAP)</a></li>
+		    	<li role="presentation" ><a href="#" ng-click="showDiv('grpFlag')">Group Analysis (GRP)</a></li>
+		    	<li role="presentation" ><a href="#" ng-click="showDiv('xddFlag')">XDD Analysis (XDD)></a></li>
+		    </ul>
+		  </li>
+
+		   <li role="presentation" ><a href="#" ng-click="showDiv('helpFlag')">Read Me</span></a></li>
+		   <li role="presentation" ><a href="#" ng-click="showDiv('videoFlag')">Demo</span></a></li>
+		</ul>
+	</div><!-- menu end -->
+
+	<div class="container">
+
+
+		<div class="home_div" ng-show="homeFlag">
+			<div class="col-md-5 home_div1 list-group-item-info"><h3>Forms Comparison Tool</h3>
+				<ul class="list-group">
+				  <li>The tool compare the components between PROD and lower region and create a report of newly added or deleted components details in an HTML page.</li>
+				  <li> The tool also compare the contents of modified components (between PROD and lower region) and create an HTML report with the changes for each component.</li>
+				</ul>
+				<!--<div style="padding-left:30px;">
+					<img src="app/images/comparisonreport1.png" class="img-rounded" alt="new/deleted components sheet" width="150" height="150" style="padding-left:1;">
+			 		<img src="app/images/comparisonreport2.png" class="img-rounded" alt="modified components sheet" width="230" height="150" style="padding-left:1px;">
+				</div>-->
+				
+			</div>
+
+  			<div class="col-md-5 home_div2 list-group-item-success"><h3>Forms Analysis Tool</h3>
+				<ul class="list-group">
+				  <li>Forms AnalysisTool is used to generate the Section,Image,Group and XDD reports</li>
+				  <li>The reports are generated in Excel format </li>
+
+				</ul>
+  			</div>
+
+		</div><!-- home_div end -->
+
+
+
+		<div class="form_comp_div" ng-show="formCompFlag">
+			<div class="section-title text-center">
+                <h3>Components Comparison Report</h3>
+                <p>This is used to create the comparison report for QA and Prod components</p>
+            </div>
+			<u><b>Steps:</b></u><br><br>
+			<ul class="list-group">
+			  <li class="list-group-item">1. Filter all the production components(BDF, FOR, FAP, DAL, XDD and LOG) with last version and last revision and extract it to folder -<br>&nbsp;&nbsp;&nbsp;&nbsp;<b>{{workingdir}}input/formcomparison/Prod-Components/</b></li>
+			  <li class="list-group-item">2. Filter all latest prod ready components (BDF, FOR, FAP, DAL, XDD and LOG) and extract it to folder - <br>&nbsp;&nbsp;&nbsp;&nbsp;<b>{{workingdir}}input/formcomparison/QA-Components/</b></li>
+			  <li class="list-group-item">3. Click on below <b>Generate Report</b> button</li>
+			  <li class="list-group-item">4. The Report will be generated in output path - <b>{{workingdir}}output/formcomparison/</b></li>
+			</ul>
+			
+			<div class="col-lg-12 text-center">
+              <button ng-click="execute('GenerateComponentsComparisonReport.bat')" class="btn btn-primary">Generate Report</button>
+            </div>
+		</div><!-- form_comp_div end -->
+
+
+		<div class="forms_analysis_report_div" ng-show="formAnarepFlag">
+		    <div class="section-title text-center">
+                <h3>Forms Analysis Report</h3>
+                <p>This is used to create the combined Report of FOR,FAP,GRP and XDD components in a single excel sheet</p>
+            </div>
+			<u><b>Steps:</b></u><br><br>
+			<ul class="list-group">
+			  <li class="list-group-item">1. Extract the required "FOR" files in the below input path</li>
+			  <li class="list-group-item">2. Convert the required "FAP" files into XML and place in the below input path. Also place the "FAP" files as it is in input path</li>
+			  <li class="list-group-item">3. Place required "GRP" files in the below input path</li>
+			  <li class="list-group-item">4. Place required "XDD" files in the below input path</li>
+			  <li class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;Input Path - <b>{{workingdir}}input/formanalysis/components/</b></li>
+			  <li class="list-group-item">5. Click on below <b>Generate Report</b> button</li>
+			  <li class="list-group-item">6. The Reports will be generated in output path - <b>{{workingdir}}output/formanalysis/</b></li>
+			</ul>
+			
+			<div class="col-lg-12 text-center">
+              <button ng-click="execute('GenerateFormsAnalsysReport.bat')" class="btn btn-primary">Generate Report</button>
+            </div>
+		</div><!-- forms_analysis_report_div end -->
+
+		<div class="section_analysis_div" ng-show="sectionFlag">
+            <div class="section-title text-center">
+                <h3>Section Analysis Report</h3>
+                <p>This is used to create the Section Level Report from FOR components </p>
+            </div>
+			<u><b>Steps:</b></u><br><br>
+			<ul class="list-group">
+			  <li class="list-group-item">1. Extract the required "FOR" files in the below input path</li>
+			  <li class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;Input Path - <b>{{workingdir}}input/formanalysis/components/</b></li>
+			  <li class="list-group-item">2. Click on below <b>Generate Report</b> button</li>
+			  <li class="list-group-item">3. The Reports will be generated in output path - <b>{{workingdir}}output/formanalysis/</b></li>
+			</ul>
+			
+			<div class="col-lg-12 text-center">
+              <button ng-click="execute('GenerateSectionLevelReport.bat')" class="btn btn-primary">Generate Report</button>
+            </div>
+		</div><!-- section_analysis_div end -->
+
+
+		<div class="image_analysis_report_div" ng-show="imgFlag">
+            <div class="section-title text-center">
+                <h3>Image Analysis Report</h3>
+                <p>This is used to create the Field Level Report from FAP components </p>
+            </div>
+
+			<u><b>Steps:</b></u><br><br>
+			<ul class="list-group">
+			  <li class="list-group-item">1. Convert the required "FAP" files into XML and place in the below input path</li>
+			  <li class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;Input Path - <b>{{workingdir}}input/formanalysis/components/</b></li>
+			  <li class="list-group-item">2. Click on below <b>Generate Report</b> button</li>
+			  <li class="list-group-item">3. The Reports will be generated in output path - <b>{{workingdir}}output/formanalysis/</b></li>
+			</ul>
+			
+			<div class="col-lg-12 text-center">
+              <button ng-click="execute('GenerateFieldLevelReport.bat')" class="btn btn-primary">Generate Report</button>
+            </div>
+		</div><!-- image_analysis_report_div end -->
+
+
+
+		<div class="group_analysis_div" ng-show="grpFlag">
+            <div class="section-title text-center">
+                <h3>Group Analysis Report</h3>
+                <p>This is used to create the Group Level Report from GRP components </p>
+            </div>
+			<u><b>Steps:</b></u><br><br>
+			<ul class="list-group">
+			  <li class="list-group-item">1. Extract the required "GRP" files in the below input path</li>
+			  <li class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;Input Path - <b>{{workingdir}}input/formanalysis/components/</b></li>
+			  <li class="list-group-item">2. Click on below <b>Generate Report</b> button</li>
+			  <li class="list-group-item">3. The Reports will be generated in output path - <b>{{workingdir}}output/formanalysis/</b></li>
+			</ul>
+			
+			<div class="col-lg-12 text-center">
+              <button ng-click="execute('GenerateGroupLevelReport.bat')" class="btn btn-primary">Generate Report</button>
+            </div>
+		</div><!-- group_analysis_div end -->
+
+
+
+		<div class="xdd_analysis_div" ng-show="xddFlag">
+			<div class="section-title text-center">
+                <h3>XDD Report</h3>
+                <p>This is used to create the XDD Level Report of components </p>
+             </div>
+			<u><b>Steps:</b></u><br><br>
+			<ul class="list-group">
+			  <li class="list-group-item">1. Extract the required "XDD" files in the below input path</li>
+			  <li class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;Input Path - <b>{{workingdir}}input/formanalysis/components/</b></li>
+			  <li class="list-group-item">2. Click on below <b>Generate Report</b> button</li>
+			  <li class="list-group-item">3. The Reports will be generated in output path - <b>{{workingdir}}output/formanalysis/</b></li>
+			</ul>
+			
+			<div class="col-lg-12 text-center">
+              <button ng-click="execute('GenerateXDDReport.bat')" class="btn btn-primary">Generate Report</button>
+            </div>
+		</div><!-- xdd_analysis_div end -->
+
+
+
+		<div class="help_div" ng-show="helpFlag">
+			<br><br>
+			<div class="alert alert-success" role="alert">When using for the first time, create the folder structure for Forms Analysis &amp; Comparison Tool by clicking the below button</div>
+			<div class="alert alert-success" role="alert">Note:Please use <b>Internet Explorer</b> Browser, This application is not supported in Chrome</div>
+			<div class="alert alert-success" role="alert">Note:If you are unable to run bat file from IE go to IE Settings->Saftey->Turnoff Smartscreen filter</div>
+			<div class="alert alert-success" role="alert">Note:In case of any error occured please check the logs from the path - <b>{{workingdir}}logs/</b></div>
+
+			<div class="col-lg-12 text-center">
+              <button ng-click="execute('CreateWorkingFolders.bat')" class="btn btn-primary">Create Working Folders</button>
+            </div>
+		</div><!-- help_div end -->
+		
+		<div class="video_div" ng-show="videoFlag">
+			<center><video width="600" height="350"  controls>
+			  <source src="app/video/Demo.mp4" type="video/mp4">
+			  Your browser does not support HTML5 video.
+			</video>
+			</center>
+		</div><!-- video_div end -->
+		
+		
+	
+	</div><!-- container end -->
+
+</div><!-- mainController end -->
+<div><center><br>Copyright &copy;Kiran Prasad.  All rights Reserved</center></div>
+
+
+
+
+</body>
+</html>
